@@ -67,7 +67,7 @@
  *     覆盖 --dsw-* 的，声明在 :root 会永远取到浅色值）
  *   - 面板/头部/标签/连接栏/终端区重排：投影 + 圆角 + 入场动效、活动标签强调、
  *     状态胶囊限宽省略、连接栏 tmux 持久徽标独立成 chip、终端底色与 xterm
- *     配色（光标取皮肤强调色、行高 1.35、JetBrains Mono 优先）
+ *     配色（光标取皮肤强调色、行高 1、MesloLGL Nerd Font Mono 优先）
  *   - 图标全面矢量化为内置 SVG 常量（窗口按钮 / 菜单 / SFTP 行内操作 / 文件
  *     类型），替换 emoji 与文字符号；行内操作按钮改为悬停显现
  *   - 遮罩改为「图标 + 标题 + 可点副文案」动作卡片；toast 分 warn/error/info
@@ -2228,13 +2228,13 @@ function createTerminal(tab) {
   theme.brightWhite = cssVar('--tt-an-bright-white')
   const term = new Terminal({
     cursorBlink: true,
-    cursorStyle: 'bar',
+    cursorStyle: 'block',
     cursorInactiveStyle: 'outline',
     fontSize: 13,
-    fontFamily: '"JetBrains Mono", "SF Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace',
+    fontFamily: '"MesloLGL Nerd Font Mono", "Sarasa Term SC Nerd", "JetBrains Mono", "SF Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace',
     fontWeight: 400,
     fontWeightBold: 600,
-    lineHeight: 1.35,
+    lineHeight: 1,
     scrollback: 5000,
     convertEol: false,
     // 搜索高亮装饰（SearchAddon decorations）依赖提案 API

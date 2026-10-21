@@ -195,36 +195,36 @@
 
 .tt_sidebarEntry {
   position: relative;
-  /* 宿主不对插件 DOM 做全局 box-sizing reset（它自己的组件都逐个显式声明）：
-     width:100% + 左右各 12px padding 在 content-box 下会比容器宽 24px，多出的右侧
-     12px 正好是徽标所在处，被侧边栏裁掉 → 徽标贴死裁切线、末位字符被切一半。 */
+  /* 尺寸对齐宿主侧栏条目 .panelRow：min-height 36 / padding 7px 8px / margin 0 2px
+     / line-height 22 / 14px 字号。宿主不对插件 DOM 做全局 box-sizing reset，
+     所以这里显式 border-box，并把宽度让出左右各 2px 外边距。 */
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: var(--tt-gap-md);
-  width: 100%;
+  gap: 8px;
+  width: calc(100% - 4px);
   min-width: 0;
-  height: 32px;
-  padding: 0 12px;
+  margin: 0 2px;
+  min-height: 36px;
+  padding: 7px 8px;
   border: none;
   border-radius: var(--tt-r-md);
   background: 0 0;
-  color: var(--tt-label-2);
-  font-size: 13px;
-  line-height: 20px;
+  color: var(--tt-label);
+  font-size: 14px;
+  line-height: 22px;
   white-space: nowrap;
   cursor: pointer;
   transition: background var(--tt-dur) var(--tt-ease), color var(--tt-dur) var(--tt-ease);
 }
 .tt_sidebarEntry:hover {
-  background: var(--dsw-specific-sidebar-nav-item-hover, var(--tt-hover));
+  background: var(--tt-hover);
   color: var(--tt-label);
 }
 .tt_sidebarEntry[data-active],
 .tt_sidebarEntry[data-minimized] {
-  background: var(--dsw-specific-sidebar-nav-item-active, var(--tt-hover-solid));
+  background: var(--tt-hover);
   color: var(--tt-label);
-  font-weight: 600;
 }
 .tt_sidebarEntry:focus-visible {
   outline: none;
@@ -235,9 +235,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   color: currentColor;
+}
+.tt_sidebarEntryIcon svg {
+  width: 16px;
+  height: 16px;
 }
 .tt_sidebarEntryLabel {
   overflow: hidden;
@@ -246,6 +250,7 @@
 [data-sidebar-collapsed] .tt_sidebarEntry {
   justify-content: center;
   width: 100%;
+  margin: 0;
   /* 折叠 rail 里宿主的行是 36×36（.hHd-Xa_collapsed .hHd-Xa_panelRow），跟齐，
      否则本插件入口比同栏其它入口矮 4px */
   height: 36px;
